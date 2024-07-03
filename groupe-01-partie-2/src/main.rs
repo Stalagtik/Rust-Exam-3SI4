@@ -4,6 +4,9 @@ use clap::{App, Arg};
 mod scanner;
 use scanner::scan_port;
 
+/// Fonction principale
+/// Cette fonction gère les arguments de la ligne de commande et appelle la fonction scan_port pour scanner le port spécifié sur l'adresse IP donnée.
+/// Les paramètres attendus sont l'adresse IP et le port à scanner.
 fn main() {
     //Définir les arguments de la ligne de commande et les aides
     let matches = App::new("Port Scanner")
