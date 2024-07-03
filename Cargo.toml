@@ -1,7 +1,0 @@
-[package]
-name = "exam"
-version = "0.1.0"
-edition = "2021"
-authors = ["Théo Berquer <theo.berquer05@gmail.com>","Jiullian Ferreira <jiullian77470@gmail.com>"]
-
-[dependencies]
