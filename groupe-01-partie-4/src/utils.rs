@@ -1,4 +1,5 @@
-use std::net::{IpAddr, ToSocketAddrs};
+use std::net::{IpAddr, ToSocketAddrs, SocketAddr, TcpStream};
+use std::time::Duration;
 use ping::ping;
 
 pub fn host_is_up(address: &str) -> bool {
@@ -29,5 +30,16 @@ pub fn host_is_up(address: &str) -> bool {
             println!("Ping échoué pour {}", ip_addr);
             false
         },
+    }
+}
+
+pub fn scan_port(ip: &str, port: u16) -> bool {
+    let address = format!("{}:{}", ip, port);
+    let socket_addr: SocketAddr = address.parse().unwrap();
+    let timeout = Duration::from_secs(3);
+
+    match TcpStream::connect_timeout(&socket_addr, timeout) {
+        Ok(_) => true,
+        Err(_) => false,
     }
 }
