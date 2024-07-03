@@ -3,7 +3,8 @@ use std::net::{TcpStream, SocketAddr};
 use std::time::Duration;
 use std::num::ParseIntError;
 
-//Scanne un port sur l'adresse IP donnée et retourne vrai si le port est ouvert, faux sinon
+/// Fonction pour scanner un port sur une adresse IP donnée
+/// Cette fonction tente de se connecter au port spécifié sur l'adresse IP donnée.
 pub fn scan_port(ip: &str, port: u16) -> bool {
     let address = format!("{}:{}", ip, port);
     let socket_addr: SocketAddr = address.parse().unwrap();
@@ -15,7 +16,8 @@ pub fn scan_port(ip: &str, port: u16) -> bool {
     }
 }
 
-//Scanne une plage de ports sur l'adresse IP donnée et retourne une liste (port, ouvert)
+/// Fonction pour scanner une plage de ports sur une adresse IP donnée
+/// Cette fonction appelle la fonction scan_port pour chaque port dans la liste spécifiée.
 pub fn scan_range_port(ip: &str, ports: &[u16]) -> Vec<(u16, bool)> {
     //Créer un vecteur pour stocker les résultats
     let mut results = Vec::new();
@@ -27,7 +29,8 @@ pub fn scan_range_port(ip: &str, ports: &[u16]) -> Vec<(u16, bool)> {
     results
 }
 
-//Parse les ports à scanner à partir d'une chaîne de caractères
+/// Fonction pour parser une chaîne de caractères contenant une liste de ports
+/// Cette fonction prend une chaîne de caractères contenant une liste de ports séparés par des virgules ou des tirets.
 pub fn parse_ports(ports_str: &str) -> Result<Vec<u16>, ParseIntError> {
     //Créer un vecteur pour stocker les ports
     let mut ports = Vec::new();
