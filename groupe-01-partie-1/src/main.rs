@@ -1,28 +1,34 @@
 mod fonctions;
 
 use clap::{App, Arg};
-use crate::fonctions::host_is_up;
+use crate::fonctions::{host_is_up, check_ip_range};
 
 fn main() {
-    //configuration de l'interface
+    // Configuration de l'interface en utilisant clap
     let matches = App::new("Host Checker")
         .version("1.0")
         .author("Theo/Jiullian")
-        .about("verifie si un host est en ligne ou non")
+        .about("Vérifie si un hôte est en ligne ou non")
         .arg(Arg::new("address")
-            .help("adresse IP ou FQDN de l'hôte à vérifier")
+            .help("Adresse IP ou FQDN de l'hôte à vérifier. Pour vérifier une plage d'adresses, utilisez CIDR (par exemple, X.X.X.X/24)")
             .required(true)
             .index(1))
         .get_matches();
 
-    //récupére l'entrée du user
+    // Récupération de l'entrée utilisateur
     let address = matches.value_of("address").unwrap();
 
-    let is_up = host_is_up(address);
-
-    if is_up {
-        println!("l'adresse : {} est en ligne", address);
+    // Vérification si l'adresse est une plage CIDR
+    if address.contains('/') {
+        check_ip_range(address);
     } else {
-        println!("l'adresse : {} est pas en ligne", address);
+        // Vérification de l'adresse individuelle
+        let is_up = host_is_up(address);
+
+        if is_up {
+            println!("L'adresse : {} est en ligne", address);
+        } else {
+            println!("L'adresse : {} est pas en ligne", address);
+        }
     }
 }
