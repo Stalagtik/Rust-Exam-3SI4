@@ -2,6 +2,7 @@ use std::net::{IpAddr, ToSocketAddrs, SocketAddr, TcpStream};
 use std::time::Duration;
 use ping::ping;
 
+/// Fonction permettant de vérifier si un hôte est en ligne
 pub fn host_is_up(address: &str) -> bool {
     //conversion de l'adresse en IpAddr
     let ip_addr: IpAddr = match address.parse() {
@@ -33,6 +34,7 @@ pub fn host_is_up(address: &str) -> bool {
     }
 }
 
+/// Fonction permettant de scanner un port
 pub fn scan_port(ip: &str, port: u16) -> bool {
     let address = format!("{}:{}", ip, port);
     let socket_addr: SocketAddr = address.parse().unwrap();
