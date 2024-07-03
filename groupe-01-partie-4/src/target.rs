@@ -1,5 +1,7 @@
 use std::net::IpAddr;
 
+use crate::utils::host_is_up;
+
 pub struct Target {
     ip_addr: IpAddr,
     is_up: bool,
@@ -11,7 +13,7 @@ impl Target {
     pub fn new(ip_addr: IpAddr) -> Self {
         Target {
             ip_addr,
-            is_up: false,
+            is_up: host_is_up("10.33.1.24"),
             open_ports: Vec::new(),
         }
     }
