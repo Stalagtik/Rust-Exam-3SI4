@@ -3,12 +3,15 @@ use std::net::IpAddr;
 use crate::utils::host_is_up;
 use crate::utils::scan_port;
 
+
+/// Structure représentant une cible à scanner
 pub struct Target {
     ip_addr: IpAddr,
     is_up: bool,
     open_ports: Vec<u16>,
 }
 
+/// Implémentation de la structure Target
 impl Target {
     // Créer une nouvelle instance de Target
     pub fn new(ip_addr: IpAddr) -> Self {

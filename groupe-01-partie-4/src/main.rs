@@ -4,6 +4,8 @@ mod utils;
 use std::net::IpAddr;
 use target::Target;
 
+/// Fonction principale pour tester la structure Target
+/// Cette fonction crée une nouvelle cible avec une adresse IP, ajoute quelques ports et vérifie s'ils sont ouverts.
 fn main() {
     // Création d'une nouvelle cible avec une adresse IP
     let ip_address: IpAddr = "10.33.1.24".parse().expect("Adresse IP invalide");
