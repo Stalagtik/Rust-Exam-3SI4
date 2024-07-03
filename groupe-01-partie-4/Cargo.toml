@@ -1,9 +1,8 @@
 [package]
-name = "groupe-01-partie-1"
+name = "groupe-01-partie-4"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = "3.0.0"
 ping = "0.4.1"
-ipnetwork = "0.18"
+clap = "3.0.0"
