@@ -1,4 +1,5 @@
 mod target;
+mod utils;
 
 use std::net::IpAddr;
 use target::Target;
@@ -14,10 +15,6 @@ fn main() {
     //affichage de l'état initial de disponibilité de la cible
     println!("cible en ligne ? : {}\n", target.is_up());
 
-    println!("modif du is up en 'true'\n");
-
-    target.set_is_up(true);
-    println!("cible en ligne ? : {}", target.is_up());
 
     //ajout de quelque ports
     target.add_open_port(80);
