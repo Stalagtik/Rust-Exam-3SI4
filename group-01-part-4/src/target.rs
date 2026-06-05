@@ -4,16 +4,16 @@ use crate::utils::host_is_up;
 use crate::utils::scan_port;
 
 
-/// Structure représentant une cible à scanner
+/// Structure representing a target to scan
 pub struct Target {
     ip_addr: IpAddr,
     is_up: bool,
     open_ports: Vec<u16>,
 }
 
-/// Implémentation de la structure Target
+/// Implementation of the Target struct
 impl Target {
-    // Créer une nouvelle instance de Target
+    // Create a new instance of Target
     pub fn new(ip_addr: IpAddr) -> Self {
         Target {
             ip_addr,
@@ -22,27 +22,27 @@ impl Target {
         }
     }
 
-    // Getter pour l'adresse IP de la cible
+    // Getter for the IP address of the target
     pub fn ip_addr(&self) -> &IpAddr {
         &self.ip_addr
     }
 
-    // Getter pour l'état de disponibilité de la cible
+    // Getter for the availability state of the target
     pub fn is_up(&self) -> bool {
         self.is_up
     }
 
-    // Setter pour l'état de disponibilité de la cible
+    // Setter for the availability state of the target
     pub fn set_is_up(&mut self, is_up: bool) {
         self.is_up = is_up;
     }
 
-    // Getter pour les ports ouverts de la cible
+    // Getter for the open ports of the target
     pub fn open_ports(&self) -> &Vec<u16> {
         &self.open_ports
     }
 
-    // Setter pour ajouter un port ouvert à la cible
+    // Method to add a scanned open port to the target
     pub fn add_open_port(&mut self, port: u16) {
         if scan_port(&self.ip_addr.to_string(), port) {
             self.open_ports.push(port);

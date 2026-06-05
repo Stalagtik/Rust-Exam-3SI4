@@ -1,10 +1,10 @@
-//Importer les bibliothèques nécessaires
+// Import necessary libraries
 use std::net::{TcpStream, SocketAddr};
 use std::time::Duration;
 use std::num::ParseIntError;
 
-/// Fonction pour scanner un port sur une adresse IP donnée
-/// Cette fonction tente de se connecter au port spécifié sur l'adresse IP donnée.
+/// Function to scan a port on a given IP address
+/// This function attempts to connect to the specified port on the given IP address.
 pub fn scan_port(ip: &str, port: u16) -> bool {
     let address = format!("{}:{}", ip, port);
     let socket_addr: SocketAddr = address.parse().unwrap();
@@ -16,12 +16,12 @@ pub fn scan_port(ip: &str, port: u16) -> bool {
     }
 }
 
-/// Fonction pour scanner une plage de ports sur une adresse IP donnée
-/// Cette fonction appelle la fonction scan_port pour chaque port dans la liste spécifiée.
+/// Function to scan a range of ports on a given IP address
+/// This function calls scan_port for each port in the specified list.
 pub fn scan_range_port(ip: &str, ports: &[u16]) -> Vec<(u16, bool)> {
-    //Créer un vecteur pour stocker les résultats
+    // Create a vector to store the results
     let mut results = Vec::new();
-    //Pour chaque port dans la liste, appeler scan_port et stocker le résultat
+    // For each port in the list, call scan_port and store the result
     for &port in ports {
         let is_open = scan_port(ip, port);
         results.push((port, is_open));
@@ -29,12 +29,12 @@ pub fn scan_range_port(ip: &str, ports: &[u16]) -> Vec<(u16, bool)> {
     results
 }
 
-/// Fonction pour parser une chaîne de caractères contenant une liste de ports
-/// Cette fonction prend une chaîne de caractères contenant une liste de ports séparés par des virgules ou des tirets.
+/// Function to parse a string containing a list of ports
+/// This function takes a string containing a list of ports separated by commas or dashes.
 pub fn parse_ports(ports_str: &str) -> Result<Vec<u16>, ParseIntError> {
-    //Créer un vecteur pour stocker les ports
+    // Create a vector to store the ports
     let mut ports = Vec::new();
-    //Pour chaque partie de la chaîne, séparée par des virgules ou des tirets, ajouter les ports au vecteur
+    // For each part of the string split by commas, parse individual ports or ranges
     for part in ports_str.split(',') {
         if part.contains('-') {
             let mut range_iter = part.split('-');
